@@ -90,7 +90,8 @@ if __name__ == "__main__":
 
     elif args.bench_image:
         logger.info("Testing on Zidane image")
-        model.predict("./data/images/zidane.jpg")
+        zidane = model.predict("./data/images/zidane.jpg")
+        print(zidane)
 
     elif args.bench_coco:
         logger.info("Testing on COCO dataset")
@@ -125,7 +126,8 @@ if __name__ == "__main__":
         
     elif args.image is not None:
         logger.info("Testing on user image: {}".format(args.image))
-        model.predict(args.image)
+        asil = model.predict(args.image)
+        print(asil)
         
     elif args.stream:
         logger.info("Opening stream on device: {}".format(args.device))

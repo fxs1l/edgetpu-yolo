@@ -81,6 +81,15 @@ class EdgeTPUModel:
         # Load the model and allocate
         self.interpreter = etpu.make_interpreter(self.model_file)
         self.interpreter.allocate_tensors()
+
+        # Debug:
+        # Check which delegates are being used
+        delegates = self.interpreter._delegates  # Internal attribute (not officially documented)
+        
+        if delegates:
+            print("Edge TPU is being used.")
+        else:
+            print("Model is running on CPU.")
     
         self.input_details = self.interpreter.get_input_details()
         self.output_details = self.interpreter.get_output_details()
@@ -128,6 +137,7 @@ class EdgeTPUModel:
         base, ext = os.path.splitext(image_path)
         
         output_path = base + "_detect" + ext
+        print(output_path, "output path")
         det = self.process_predictions(pred[0], full_image, pad, output_path, save_img=save_img, save_txt=save_txt)
         
         return det
